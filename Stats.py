@@ -10,7 +10,6 @@ class TempStats():
         self.n = len(self.tempDict)
         self.mean = self.sampleMean()
 
-
     def loadData(self):
         """Load the temperature data into tempDict from the csv file"""
         with open("archive.csv", "r") as tempData:
@@ -31,7 +30,6 @@ class TempStats():
 
     def analyzeData(self):
         """Displays a summary of all possible Statistical methods"""
-
         # Sample Mean
         print(f"Sample Mean: {'%.2f' % self.sampleMean()}\n")
 
@@ -118,7 +116,6 @@ class TempStats():
             sum += t
         return (sum/len(slicedTemps))
         
-
     def quartile(self, num):
         """Returns the num percentile/quartile"""
         """num should be given as a value < 1"""
@@ -131,14 +128,12 @@ class TempStats():
             return self.sortedTemps[index]
 
 def main():
+    # Create and instance of the Temperature Stats Class
     T = TempStats()
+    # Display a table of the population data
     print(T)
-
+    # Run the statistics methods and display the analysis
     T.analyzeData()
-
-    # for t in T.sortedTemps:
-    #     print(f"{t}\n")
-
 
 if __name__ == "__main__":
     main()

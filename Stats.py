@@ -49,6 +49,11 @@ class TempStats():
         sample = self.randomSample(20)
         print(f"Sample Mean: {'%.2f' % sample[0]}\nSample Variance: {'%.2f' % sample[1]}\n")
 
+        # 5%, 10%, 20% Trimmed mean
+        print(f"5% Trimmed Mean: {'%.2f' %self.trimmedMean(5)}\n")
+        print(f"10% Trimmed Mean: {'%.2f' %self.trimmedMean(10)}\n")
+        print(f"20% Trimmed Mean: {'%.2f' %self.trimmedMean(20)}\n")
+
         # First and Third Quartiles
         print(f"First Quartile: {self.quartile(0.25)}\n")
         print(f"Third Quartile: {self.quartile(0.75)}\n")
@@ -101,8 +106,22 @@ class TempStats():
         variance = sum/amount
         return mean, variance
 
+    def trimmedMean(self, percent):
+        """Returns the percent trimmed mean"""
+        """percent should be given as a whole number"""
+        percent = percent / 100
+        edge = round(percent * len(self.sortedTemps))
+        slicedTemps = self.sortedTemps[edge:-edge]
+        # Calculate mean
+        sum = 0
+        for t in slicedTemps:
+            sum += t
+        return (sum/len(slicedTemps))
+        
+
     def quartile(self, num):
         """Returns the num percentile/quartile"""
+        """num should be given as a value < 1"""
         index = num * len(self.sortedTemps)
         
         if (index % 1) != 0:

@@ -26,7 +26,7 @@ class TempStats():
         """Displays a table of the average temperature data"""
         formattedStr = f"\nDate      : Average Temp(F)\n"
         for item in self.tempDict:
-            formattedStr += f"{item}{' '*(9-len(item))} : {self.tempDict[item]}\n"
+            formattedStr += f"{item}{' '*(9-len(item))} : {self.tempDict[item]}°F\n"
         return formattedStr
 
     def analyzeData(self):
@@ -132,7 +132,7 @@ class TempStats():
 
 def main():
     T = TempStats()
-    #print(T)
+    print(T)
 
     T.analyzeData()
 

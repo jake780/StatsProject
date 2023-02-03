@@ -1,4 +1,5 @@
 from random import choice
+import matplotlib.pyplot as plt
 
 class TempStats():
     """Loads and Analyzes average temperature data"""
@@ -44,9 +45,13 @@ class TempStats():
         print(f"Sample Standard Dev: {'%.2f' % self.sampleStandardDeviation()}\n")
 
         # Simple Random Sample of 20
-        print("Simple Random Sample of size 20\n")
+        print("Simple Random Sample of size 20")
         sample = self.randomSample(20)
-        print(f"Sample Mean: {sample[0]}\nSample Variance: {sample[1]}")
+        print(f"Sample Mean: {'%.2f' % sample[0]}\nSample Variance: {'%.2f' % sample[1]}\n")
+
+        # First and Third Quartiles
+        print(f"First Quartile: {self.quartile(0.25)}\n")
+        print(f"Third Quartile: {self.quartile(0.75)}\n")
 
     def sampleMean(self):
         """Returns the average temperature"""
@@ -94,15 +99,27 @@ class TempStats():
         for s in samples:
             sum += ((s-mean)**2)
         variance = sum/amount
-
         return mean, variance
+
+    def quartile(self, num):
+        """Returns the num percentile/quartile"""
+        index = num * len(self.sortedTemps)
         
+        if (index % 1) != 0:
+            index = int(index - (index % 1))
+            return ((self.sortedTemps[index] + self.sortedTemps[index+1])/2)
+        else:
+            return self.sortedTemps[index]
 
 def main():
     T = TempStats()
     #print(T)
 
     T.analyzeData()
+
+    # for t in T.sortedTemps:
+    #     print(f"{t}\n")
+
 
 if __name__ == "__main__":
     main()

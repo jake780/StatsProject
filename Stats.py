@@ -36,6 +36,9 @@ class TempStats():
         # Sample Median
         print(f"Sample Median: {self.sampleMedian()}\n")
 
+        # Sample Modes
+        print(f"Same Modes: {self.sampleMode()}\n")
+
         # Sample Variance
         print(f"Sample Variance: {'%.2f' % self.sampleVariance()}\n")
 
@@ -73,6 +76,28 @@ class TempStats():
         else:
             #Odd
             return self.sortedTemps[self.n]
+
+    def sampleMode(self):
+        """Returns the mode temperature"""
+        # Count occurences of each value
+        tempCounts = {}
+        for t in self.sortedTemps:
+            if t not in tempCounts:
+                tempCounts[t] = 1
+            else:
+                tempCounts[t] += 1
+        # Find the largest amount of occurences
+        maxVal = 0
+        for t in tempCounts:
+            if tempCounts[t] > maxVal:
+                maxVal = tempCounts[t]
+        # Return a list of all temps with the most occurences
+        tempList = []
+        for t in tempCounts:
+            if tempCounts[t] == maxVal:
+                tempList.append(t)
+        return tempList
+
 
     def sampleVariance(self):
         """Returns the sample variance of the data"""

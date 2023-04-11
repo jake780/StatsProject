@@ -152,6 +152,15 @@ class TempStats():
         else:
             return self.sortedTemps[index]
 
+def histogram(data):
+    """Creates a Pyplot Histogram of the data"""
+    plt.hist(data, bins=20)
+    plt.title("Average Daily Temperature (Jan-Mar) for Provo, Utah")
+    plt.minorticks_on()
+    plt.xlabel("Temperature")
+    plt.ylabel("Frequency")
+    plt.show()
+
 def main():
     # Create and instance of the Temperature Stats Class
     T = TempStats()
@@ -159,6 +168,9 @@ def main():
     print(T)
     # Run the statistics methods and display the analysis
     T.analyzeData()
+
+    # Graph the data onto a histogram
+    histogram(T.sortedTemps)
 
 if __name__ == "__main__":
     main()

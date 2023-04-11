@@ -1,5 +1,6 @@
 from random import choice
 import matplotlib.pyplot as plt
+import math
 
 class TempStats():
     """Loads and Analyzes average temperature data"""
@@ -171,8 +172,26 @@ class TempStats():
         plt.show()
 
     def dotplot(self):
-        plt.plot(self.sortedTemps)
-        plt.title(self.graphTitle)
+        roundedTemps = [round(x) for x in self.sortedTemps]
+        yvals = []
+        last = 0
+        count = 1
+        for t in roundedTemps:
+            if t == last:
+                count += 1
+                yvals.append(count)
+            else:
+                count = 1
+                yvals.append(count)
+            last = t
+
+        plt.figure(num=1, figsize=((8, 4)))
+        plt.scatter(roundedTemps, yvals, s=20)
+        plt.ylim(bottom = 0, top=30)
+        plt.xticks([x for x in range(4, 56, 2)])
+        plt.xlabel("Temperature")
+        plt.ylabel("Frequency")
+        plt.title(self.graphTitle)      
         plt.show()
 
 def main():

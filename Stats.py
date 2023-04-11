@@ -10,6 +10,8 @@ class TempStats():
         self.n = len(self.tempDict)
         self.mean = self.sampleMean()
 
+        self.graphTitle = "Average Daily Temperature (Jan-Mar) for Provo, Utah"
+
     def loadData(self):
         """Load the temperature data into tempDict from the csv file"""
         with open("archive.csv", "r") as tempData:
@@ -155,10 +157,22 @@ class TempStats():
     def histogram(self):
         """Creates a Pyplot Histogram of the data"""
         plt.hist(self.sortedTemps, bins=20)
-        plt.title("Average Daily Temperature (Jan-Mar) for Provo, Utah")
+        plt.title(self.graphTitle)
         plt.minorticks_on()
-        plt.xlabel("Temperature")
+        plt.xlabel("Temperature (F)")
         plt.ylabel("Frequency")
+        plt.show()
+
+    def boxplot(self):
+        plt.boxplot(self.sortedTemps, showmeans=True)
+        plt.title(self.graphTitle)
+        plt.ylabel("Temperature (F)")
+        plt.xlabel("Boxplot")
+        plt.show()
+
+    def dotplot(self):
+        plt.plot(self.sortedTemps)
+        plt.title(self.graphTitle)
         plt.show()
 
 def main():
@@ -171,6 +185,12 @@ def main():
 
     # Graph the data onto a histogram
     T.histogram()
+
+    # Grpah the data on a Boxplot
+    T.boxplot()
+
+    #Graph the data on a dot plot
+    T.dotplot()
 
 if __name__ == "__main__":
     main()

@@ -165,6 +165,7 @@ class TempStats():
         plt.show()
 
     def boxplot(self):
+        """Creates a boxplot of the data"""
         plt.boxplot(self.sortedTemps, showmeans=True)
         plt.title(self.graphTitle)
         plt.ylabel("Temperature (F)")
@@ -172,6 +173,7 @@ class TempStats():
         plt.show()
 
     def dotplot(self):
+        """Creates a dotplot of the data"""
         roundedTemps = [round(x) for x in self.sortedTemps]
         yvals = []
         last = 0
@@ -189,10 +191,27 @@ class TempStats():
         plt.scatter(roundedTemps, yvals, s=20)
         plt.ylim(bottom = 0, top=30)
         plt.xticks([x for x in range(4, 56, 2)])
+        plt.minorticks_on()
         plt.xlabel("Temperature")
         plt.ylabel("Frequency")
         plt.title(self.graphTitle)      
         plt.show()
+
+    def predictTemps(self):
+        """Predicts the temperature for the first week of the next year"""
+        prevWeek = self.sortedTemps[:7]
+        # Find the average of the first week data
+        sum = 0
+        for t in prevWeek:
+            sum += t
+        avg = sum/len(prevWeek)
+        # Take the standard deviation of the first week data
+        sum = 0
+        for item in prevWeek:
+            sum += ((item - avg)**2)
+        stdDev = (sum/len(prevWeek)) ** 0.5
+
+        print(f"\n{prevWeek}\nAverage: {avg}\nStdev:{stdDev}\n")
 
 def main():
     # Create and instance of the Temperature Stats Class
@@ -203,13 +222,16 @@ def main():
     T.analyzeData()
 
     # Graph the data onto a histogram
-    T.histogram()
+    #T.histogram()
 
     # Grpah the data on a Boxplot
-    T.boxplot()
+   # T.boxplot()
 
     #Graph the data on a dot plot
-    T.dotplot()
+    #T.dotplot()
+
+    # Predict the temperature for the first week of the next year
+    T.predictTemps()
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,5 @@
 from random import choice
 import matplotlib.pyplot as plt
-import math
 
 class TempStats():
     """Loads and Analyzes average temperature data"""
@@ -222,13 +221,13 @@ def main():
     T.analyzeData()
 
     # Graph the data onto a histogram
-    #T.histogram()
+    T.histogram()
 
     # Grpah the data on a Boxplot
-   # T.boxplot()
+    T.boxplot()
 
     #Graph the data on a dot plot
-    #T.dotplot()
+    T.dotplot()
 
     # Predict the temperature for the first week of the next year
     T.predictTemps()

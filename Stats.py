@@ -5,6 +5,7 @@ class TempStats():
     """Loads and Analyzes average temperature data"""
     def __init__(self):
         self.tempDict = {}
+        self.tempList = []
         self.sortedTemps = []
         self.loadData()
         self.n = len(self.tempDict)
@@ -18,6 +19,7 @@ class TempStats():
             for line in tempData:
                 line = line.split(",")
                 self.tempDict[line[0]] = float(line[1])
+                self.tempList.append(float(line[1]))
                 self.sortedTemps.append(float(line[1]))
 
         # Sort the list of temperatures
@@ -198,7 +200,8 @@ class TempStats():
 
     def predictTemps(self):
         """Predicts the temperature for the first week of the next year"""
-        prevWeek = self.sortedTemps[:7]
+        prevWeek = self.tempList[:7]
+
         # Find the average of the first week data
         sum = 0
         for t in prevWeek:
@@ -210,7 +213,11 @@ class TempStats():
             sum += ((item - avg)**2)
         stdDev = (sum/len(prevWeek)) ** 0.5
 
-        print(f"\n{prevWeek}\nAverage: {avg}\nStdev:{stdDev}\n")
+        #print(f"\n{prevWeek}\nAverage: {avg}\nStdev:{stdDev}\n")
+        print("Predicted Temperatures for the first week of the next year:")
+        for i, t in enumerate(prevWeek):
+            print(f"January {i+1}: {t}°F ± {'%.2f' % stdDev}°F")
+
 
 def main():
     # Create and instance of the Temperature Stats Class

@@ -1,3 +1,12 @@
+"""
+Jacob Eazarsky
+ECE-3710 Statistics Project
+The dataset analyzed consisted of 
+the average daily temperatures of Provo, Utah
+for the months of January, Febuary, March
+"""
+
+
 from random import choice
 import matplotlib.pyplot as plt
 
